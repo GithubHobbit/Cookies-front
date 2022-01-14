@@ -38,8 +38,12 @@ const actions = {
       return data;
     } catch (err) {
       commit("auth_error", err);
+      console.log(err.response);
       localStorage.removeItem("token");
-      return Promise.reject(err);
+      if (err.response.data.errors) {
+        return Promise.reject(err.response.data.errors[0].msg);
+      }
+      return Promise.reject(err.response.data.message);
     }
   },
   async register({ commit }, userData) {
@@ -56,7 +60,10 @@ const actions = {
     } catch (err) {
       commit("auth_error", err);
       localStorage.removeItem("token");
-      return Promise.reject(err);
+      if (err.response.data.errors) {
+        return Promise.reject(err.response.data.errors[0].msg);
+      }
+      return Promise.reject(err.response.data.message);
     }
   },
   logout({ commit }) {

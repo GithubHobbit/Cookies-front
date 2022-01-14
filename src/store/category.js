@@ -26,7 +26,7 @@ const actions = {
       const category = await getCategories();
       commit("setCategories", category);
     } catch (err) {
-      commit("seCategoryError", err);
+      commit("setCategoryError", err);
     }
   },
 };

@@ -8,6 +8,10 @@ export const request = async ({ url, method, data }) => {
     data: data,
     method: method,
   });
-  console.log(response);
   return response.data;
 };
+
+// const keys = Object.keys(err.response.data);
+// console.log(keys);
+// const values = Object.values(err.response.data);
+// console.log(values);

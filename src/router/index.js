@@ -7,11 +7,26 @@ import Test from "@/views/Test.vue";
 
 Vue.use(VueRouter);
 
+const ifAuthenticated = (to, from, next) => {
+  if (localStorage.getItem("token")) {
+    next();
+    return;
+  }
+  router.push({
+    name: "Login",
+    params: {
+      returnTo: to.path,
+      query: to.query,
+    },
+  });
+};
+
 const routes = [
   {
     path: "/",
     name: "Home",
     component: Home,
+    beforeEnter: ifAuthenticated,
   },
   {
     path: "/login",
@@ -27,6 +42,7 @@ const routes = [
     path: "/test",
     name: "Test",
     component: Test,
+    beforeEnter: ifAuthenticated,
   },
 ];
 

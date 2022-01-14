@@ -9,30 +9,15 @@
         :imageUrl="recipe.imageUrl"
       />
     </div>
-    <hr />
-    {{ user.id }}
-    <hr />
-    {{ user.roles }}
-    <hr />
-    {{ user }}
-    <hr />
-    <button @click="logUserOut"></button>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import VueJwtDecode from "vue-jwt-decode";
 
 export default {
   name: "Home",
-  data() {
-    return {
-      login: {
-        user: {},
-      },
-    };
-  },
+
   components: {
     RecipeCard: () => import("@/components/RecipeCard"),
   },
@@ -48,26 +33,6 @@ export default {
     ...mapActions({
       fetchRecipes: "fetchRecipes",
     }),
-    getUserDetails() {
-      // get token from localstorage
-      let token = localStorage.getItem("user");
-      try {
-        //decode token here and attach to the user object
-        let decoded = VueJwtDecode.decode(token);
-        this.user = decoded;
-        console.log(...decoded);
-      } catch (error) {
-        // return error in production env
-        console.log(error, "error from decoding token");
-      }
-    },
-    logUserOut() {
-      localStorage.removeItem("user");
-      this.$router.push("/login");
-    },
-  },
-  created() {
-    this.getUserDetails();
   },
 };
 </script>

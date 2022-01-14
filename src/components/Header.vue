@@ -1,65 +1,77 @@
 <template>
-  <header class="header">
-    <div class="header_left">LOGO</div>
-    <div class="header_right">
-      <ul class="nav">
-        <li
-          class="nav_link"
-          v-for="({ id, title }, key) in categories"
-          :key="key"
-        >
-          <router-link :to="`category/${id}`">
-            {{ title }}
-          </router-link>
-        </li>
+  <div class="mb-4">
+    <b-navbar toggleable="lg" type="dark" variant="info">
+      <b-navbar-brand href="#">Recipes</b-navbar-brand>
 
-        <li class="nav_link">
-          <router-link to="/login">Login</router-link>
-        </li>
-        <li class="nav_link">
-          <router-link to="/register">Register</router-link>
-        </li>
-      </ul>
-    </div>
-  </header>
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+        <b-navbar-nav>
+          <b-button class="sm" v-b-toggle.sidebar-border>Категории</b-button>
+          <b-nav-item href="#">Link</b-nav-item>
+          <b-nav-item href="#" disabled>Disabled</b-nav-item>
+          <b-nav-item href="#">Link</b-nav-item>
+          <b-nav-item href="#">Link</b-nav-item>
+        </b-navbar-nav>
+
+        <Sidebar :categories="categories" />
+
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto">
+          <b-nav-form>
+            <b-form-input
+              size="sm"
+              class="mr-sm-2"
+              placeholder="Search"
+            ></b-form-input>
+            <b-button size="sm" class="my-2 my-sm-0" type="submit"
+              >Search</b-button
+            >
+          </b-nav-form>
+
+          <b-nav-item-dropdown v-if="isLoggedIn" right>
+            <template #button-content>
+              <em>Профиль</em>
+            </template>
+
+            <b-dropdown-item @click="logout">Выйти</b-dropdown-item>
+            <b-dropdown-item to="/register">Регистрация</b-dropdown-item>
+          </b-nav-item-dropdown>
+
+          <b-navbar-nav v-else>
+            <b-nav-item to="/login">Вход</b-nav-item>
+            <b-nav-item to="/register">Регистрация</b-nav-item>
+          </b-navbar-nav>
+        </b-navbar-nav>
+      </b-collapse>
+    </b-navbar>
+  </div>
 </template>
 
 <script>
 export default {
   name: "RecipesHeader",
+  components: {
+    Sidebar: () => import("@/components/Sidebar"),
+  },
+
   props: {
     categories: {
       type: Array,
       default: () => [],
     },
   },
+  computed: {
+    isLoggedIn: function () {
+      return this.$store.getters.isLoggedIn;
+    },
+  },
+  methods: {
+    logout: function () {
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push("/login");
+      });
+    },
+  },
 };
 </script>
-
-<style lang="scss" scoped>
-.header {
-  border-bottom: 1px solid;
-  padding: 10px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.nav {
-  display: flex;
-  list-style-type: none;
-  justify-content: space-between;
-  width: 100%;
-  padding-inline-start: 0;
-  &_link {
-    margin-right: 10px;
-    a {
-      cursor: pointer;
-      text-decoration: none;
-      color: black;
-      &:hover {
-        color: olive;
-      }
-    }
-  }
-}
-</style>
