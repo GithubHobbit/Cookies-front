@@ -1,14 +1,12 @@
 <template>
   <div class="home">
-    <div class="recipe-list">
+    <b-card-group deck>
       <RecipeCard
         v-for="(recipe, key) in recipes"
         :key="key"
-        :title="recipe.title"
-        :timeToDo="recipe.timeToDo"
-        :imageUrl="recipe.imageUrl"
+        :recipe="recipe"
       />
-    </div>
+    </b-card-group>
   </div>
 </template>
 
@@ -25,13 +23,16 @@ export default {
     this.fetchRecipes();
   },
   computed: {
+    // isLoggedIn: function () {
+    //   return this.$store.getters.isLoggedIn;
+    // },
     ...mapGetters({
-      recipes: "recipes",
+      recipes: "RECIPES",
     }),
   },
   methods: {
     ...mapActions({
-      fetchRecipes: "fetchRecipes",
+      fetchRecipes: "FETCH_RECIPES",
     }),
   },
 };

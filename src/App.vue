@@ -17,12 +17,12 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchCategories: "fetchCategories",
+      fetchCategories: "FETCH_CATEGORIES",
     }),
   },
   computed: {
     ...mapGetters({
-      categories: "categories",
+      categories: "CATEGORIES",
     }),
   },
 };

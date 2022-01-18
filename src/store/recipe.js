@@ -1,4 +1,9 @@
-import { getRecipe, getRecipes } from "@/services/recipes.service";
+import {
+  getRecipe,
+  getRecipes,
+  createRecipe,
+  deleteRecipe,
+} from "@/services/recipes.service";
 
 const mutations = {
   setRecipe(state, recipe) {
@@ -13,7 +18,7 @@ const mutations = {
 };
 
 const actions = {
-  async fetchRecipe({ commit }, id) {
+  async FETCH_RECIPE({ commit }, id) {
     try {
       const recipe = await getRecipe(id);
       commit("setRecipe", recipe);
@@ -21,7 +26,7 @@ const actions = {
       commit("setRecipeError", err);
     }
   },
-  async fetchRecipes({ commit }) {
+  async FETCH_RECIPES({ commit }) {
     try {
       const recipes = await getRecipes();
       commit("setRecipes", recipes);
@@ -29,12 +34,27 @@ const actions = {
       commit("setRecipeError", err);
     }
   },
+  async CREATE_RECIPE({ commit }, recipeData) {
+    try {
+      await createRecipe(recipeData);
+    } catch (err) {
+      commit("setRecipeError", err);
+    }
+  },
+
+  async DELETE_RECIPE({ commit }, id) {
+    try {
+      await deleteRecipe(id);
+    } catch (err) {
+      commit("setRecipeError", err);
+    }
+  },
 };
 
 const getters = {
-  recipe: ({ recipe }) => recipe,
-  recipes: ({ recipes }) => recipes,
-  recipeError: ({ recipeError }) => recipeError,
+  RECIPE: ({ recipe }) => recipe,
+  RECIPES: ({ recipes }) => recipes,
+  RECIPE_ERROR: ({ recipeError }) => recipeError,
 };
 
 const state = () => ({

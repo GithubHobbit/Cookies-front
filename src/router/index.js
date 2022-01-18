@@ -3,7 +3,8 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
-import Test from "@/views/Test.vue";
+import CreateRecipe from "@/views/CreateRecipe.vue";
+import EditRecipe from "@/views/EditRecipe.vue";
 
 Vue.use(VueRouter);
 
@@ -29,6 +30,18 @@ const routes = [
     beforeEnter: ifAuthenticated,
   },
   {
+    path: "/create-recipe",
+    name: "CreateRecipe",
+    component: CreateRecipe,
+    beforeEnter: ifAuthenticated,
+  },
+  {
+    path: "/edit-recipe",
+    name: "EditRecipe",
+    component: EditRecipe,
+    beforeEnter: ifAuthenticated,
+  },
+  {
     path: "/login",
     name: "Login",
     component: Login,
@@ -37,12 +50,6 @@ const routes = [
     path: "/register",
     name: "Register",
     component: Register,
-  },
-  {
-    path: "/test",
-    name: "Test",
-    component: Test,
-    beforeEnter: ifAuthenticated,
   },
 ];
 

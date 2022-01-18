@@ -13,7 +13,7 @@ const mutations = {
 };
 
 const actions = {
-  async fetchCategory({ commit }, id) {
+  async FETCH_CATEGORY({ commit }, id) {
     try {
       const category = await getCategory(id);
       commit("setCategory", category);
@@ -21,7 +21,7 @@ const actions = {
       commit("setCategoryError", err);
     }
   },
-  async fetchCategories({ commit }) {
+  async FETCH_CATEGORIES({ commit }) {
     try {
       const category = await getCategories();
       commit("setCategories", category);
@@ -32,9 +32,9 @@ const actions = {
 };
 
 const getters = {
-  category: ({ category }) => category,
-  categories: ({ categories }) => categories,
-  categoryError: ({ categoryError }) => categoryError,
+  CATEGORY: ({ category }) => category,
+  CATEGORIES: ({ categories }) => categories,
+  CATEGORY_ERROR: ({ categoryError }) => categoryError,
 };
 
 const state = () => ({

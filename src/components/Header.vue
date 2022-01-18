@@ -7,7 +7,7 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-button class="sm" v-b-toggle.sidebar-border>Категории</b-button>
+          <b-button size="sm" v-b-toggle.sidebar-border>Категории</b-button>
           <b-nav-item href="#">Link</b-nav-item>
           <b-nav-item href="#" disabled>Disabled</b-nav-item>
           <b-nav-item href="#">Link</b-nav-item>
@@ -24,9 +24,17 @@
               class="mr-sm-2"
               placeholder="Search"
             ></b-form-input>
-            <b-button size="sm" class="my-2 my-sm-0" type="submit"
-              >Search</b-button
+            <b-button size="sm" class="mr-sm-2" type="submit">
+              Search
+            </b-button>
+            <b-button
+              size="sm"
+              class="mr-sm-2"
+              variant="dark"
+              href="/create-recipe"
             >
+              + Добавить рецепт
+            </b-button>
           </b-nav-form>
 
           <b-nav-item-dropdown v-if="isLoggedIn" right>

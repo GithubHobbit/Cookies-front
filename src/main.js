@@ -19,7 +19,7 @@ new Vue({
   render: (h) => h(App),
 }).$mount("#app");
 
-Vue.prototype.$http = Axios;
+Vue.prototype.$http = Axios; // Не понимаю смысл этого блока
 const token = localStorage.getItem("token");
 if (token) {
   Vue.prototype.$http.defaults.headers.common["Authorization"] = token;
