@@ -36,7 +36,7 @@ const routes = [
     beforeEnter: ifAuthenticated,
   },
   {
-    path: "/edit-recipe",
+    path: "/edit-recipe/:id",
     name: "EditRecipe",
     component: EditRecipe,
     beforeEnter: ifAuthenticated,

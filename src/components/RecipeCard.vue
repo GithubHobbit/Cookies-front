@@ -13,7 +13,13 @@
     <b-button class="card-link" @click="deleteRecipe" variant="danger">
       Удалить
     </b-button>
-    <b-button class="card-link" variant="warning"> Редактировать </b-button>
+    <b-button
+      class="card-link"
+      :href="`/edit-recipe/` + recipe._id"
+      variant="warning"
+    >
+      Редактировать
+    </b-button>
   </b-card>
   <!-- <div class="card">
     <div class="card_header">

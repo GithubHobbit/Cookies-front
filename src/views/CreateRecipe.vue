@@ -109,7 +109,6 @@ export default {
 
   async mounted() {
     await this.fetchCategories();
-    console.log(this.categories);
     for (let category in this.categories) {
       let { _id, title } = this.categories[category];
       this.options.push({ value: _id, text: title });

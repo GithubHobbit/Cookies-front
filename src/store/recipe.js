@@ -3,6 +3,7 @@ import {
   getRecipes,
   createRecipe,
   deleteRecipe,
+  editRecipe,
 } from "@/services/recipes.service";
 
 const mutations = {
@@ -37,6 +38,15 @@ const actions = {
   async CREATE_RECIPE({ commit }, recipeData) {
     try {
       await createRecipe(recipeData);
+    } catch (err) {
+      commit("setRecipeError", err);
+    }
+  },
+  async EDIT_RECIPE({ commit }, { form, id }) {
+    console.log(form);
+    console.log(id);
+    try {
+      await editRecipe(form, id);
     } catch (err) {
       commit("setRecipeError", err);
     }
